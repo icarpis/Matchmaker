@@ -166,22 +166,22 @@ body { font-family: sans-serif; }
   color: white;
 }
 
-/* external css: flickity.css, fullscreen.css */
+/* external css: flickity.css */
 
 * { box-sizing: border-box; }
 
 body { font-family: sans-serif; }
 
 .carousel {
-  background: #222;
+  background: white;
 }
 
 .carousel-cell {
-  width: 100%;
+  width: 66%;
   height: 200px;
   margin-right: 10px;
-  margin-left: 10px;
-  /* center images in cells with flexbox */
+  background: black;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,3 +203,4 @@ body { font-family: sans-serif; }
 .carousel.is-fullscreen .carousel-cell {
   height: 100%;
 }
+
