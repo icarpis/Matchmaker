@@ -1,0 +1,23 @@
+body {
+	text-align: center;
+	background-color: #83c4cc;
+	background-size: auto;
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+table.table-bordered{
+    border:4px solid black;
+    margin-top:20px;
+  }
+table.table-bordered > thead > tr > th{
+    border:4px solid black;
+}
+table.table-bordered > tbody > tr > td{
+    border:4px solid black;
+}

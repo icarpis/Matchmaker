@@ -173,7 +173,10 @@ body { font-family: sans-serif; }
 body { font-family: sans-serif; }
 
 .carousel {
-  background: #F5F5F5;
+  background: #83c4cc;
+  width: 98%;
+  margin-left: auto;
+  margin-right:auto;
 }
 
 .carousel-cell {

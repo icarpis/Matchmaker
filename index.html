@@ -1,86 +1,152 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html dir="rtl" lang="he">
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="./css/menu.css">
+		<link rel="stylesheet" type="text/css" href="./css/fonts.css">
         <link rel="stylesheet" type="text/css" href="./css/progressBar.css">
 		<link rel="stylesheet" type="text/css" href="./css/flickity.css">
 		<link rel="stylesheet" href="./css/fullscreen.css">
 		<link rel="stylesheet" href="./css/table.css">
-		<script src="./flickity.pkgd.min.js"></script>
-		<script src="./utilities.js"></script>
-		<script src="./fullscreen.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-storage.js"></script>
+		<script src="./js/flickity.pkgd.min.js"></script>
+		<script src="./js/utilities.js"></script>
+		<script src="./js/fullscreen.js"></script>
+		<script src="./js/db.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<style>
-		
+			p {
+				font-size: 28px;
+			}
+			h2 {
+				font-family: stamsefaradclm;
+				font-size: 36px;
+			}
+			.affix {
+				top: 0;
+				width: 100%;
+			}
+
+			.affix+.container-fluid {
+				padding-top: 70px;
+			}
 		</style>
 	</head>
-    <body style="background-color:white;text-align: center; background-color: #F5F5F5;">
-	<div style="padding: 15px 50px 15px 100px;"></div>
+    <body>
 	
-	<div id="FemaleCarousel" class="carousel">
-	</div>
+		<div class="navbar fixed-top clearfix" style="border:1px solid #000;">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<h2 style="margin-top: 8px;margin-bottom: 8px;margin-left: 30px;">השדכן</h2>
+			</div>
+			<nav class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a style="color: black; font-size: 20px;" onclick="lastMenuClick=MenuElem.Add; document.getElementById('addEditPersonModalLabel1').innerHTML= ModalTopic[lastMenuClick]; $('#addEditPerson').modal();">הוספה למאגר</a></li>
+					<hr style="margin-bottom: 4px; margin-top: 4px">
+					<li><a style="color: black; font-size: 20px;" onclick="lastMenuClick=MenuElem.EditFemale; document.getElementById('addEditPersonModalLabel1').innerHTML= ModalTopic[lastMenuClick]; $('#addEditPerson').modal();">עריכת פרטי האשה</a></li>
+					<hr style="margin-bottom: 4px; margin-top: 4px">
+					<li><a style="color: black; font-size: 20px;" onclick="lastMenuClick=MenuElem.EditMale; document.getElementById('addEditPersonModalLabel1').innerHTML= ModalTopic[lastMenuClick]; $('#addEditPerson').modal();">עריכת פרטי הגבר</a></li>
+					<hr style="margin-bottom: 0px; margin-top: 4px">
+				</ul>
+			</nav><!--/.nav-collapse -->
+		</div>
 	
-	<div style="padding: 15px 50px 15px 100px;"></div>
+		<div class="container-fluid">
+			<div style="padding: 15px 50px 15px 100px;"></div>
+			
+			<div id="FemaleCarousel" class="carousel">
+			</div>
+			
+			<div style="padding: 15px 50px 15px 100px;"></div>
 
-	<div id="MaleCarousel" class="carousel">
-	</div>
+			<div id="MaleCarousel" class="carousel">
+			</div>
+			
+			<div style="padding: 15px 50px 15px 100px;"></div>
+			
+			<table class="table1" style="table-layout: fixed;">
+				<thead>
+					<tr>
+						<th></th>
+						<th scope="col" abbr="Starter"  style="text-align:center">אשה</th>
+						<th scope="col" abbr="Medium"  style="text-align:center">גבר</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row" style="text-align:center">שם</th>
+						<td id="femaleName" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleName" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+					<tr>
+						<th scope="row" style="text-align:center">גיל</th>
+						<td id="femaleAge" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleAge" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+					<tr>
+						<th scope="row" style="text-align:center">גובה</th>
+						<td id="femaleHeight" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleHeight" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+					<tr>
+						<th scope="row" style="text-align:center">מבנה גוף</th>
+						<td id="femaleBody" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleBody" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+					<tr>
+						<th scope="row" style="text-align:center">זיקה לדת</th>
+						<td id="femaleReligious" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleReligious" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+					<tr>
+						<th scope="row" style="text-align:center">השכלה</th>
+						<td id="femaleEducation" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleEducation" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+					<tr>
+						<th scope="row" style="text-align:center">מקצוע</th>
+						<td id="femaleJob" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleJob" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+					<tr>
+						<th scope="row" style="text-align:center">עיר מגורים</th>
+						<td id="femaleCity" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+						<td id="maleCity" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			
+		<div style="padding: 15px 50px 15px 100px;"></div>
 	
-	
-	<div style="padding: 15px 50px 15px 100px;"></div>
-	
-	
-	<table class="table1" style="table-layout: fixed; width: 100%;">
-		<thead>
-			<tr>
-				<th></th>
-				<th scope="col" abbr="Starter">אשה</th>
-				<th scope="col" abbr="Medium">גבר</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th scope="row">שם</th>
-				<td id="femaleName" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td id="maleName" style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-			<tr>
-				<th scope="row">גיל</th>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-			<tr>
-				<th scope="row">גובה</th>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-			<tr>
-				<th scope="row">מבנה גוף</th>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-			<tr>
-				<th scope="row">זיקה לדת</th>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-			<tr>
-				<th scope="row">השכלה</th>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-			<tr>
-				<th scope="row">מקצוע</th>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-			<tr>
-				<th scope="row">עיר מגורים</th>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-				<td style="word-wrap:break-word; vertical-align:top; text-align:right"></td>
-			</tr>
-		</tbody>
-	</table>
-	
-	<script src="./main.js"></script>
+	<script>
+        $(document).ready(function() {
+            $(".navbar-nav a").click(function() {
+				$('.navbar-collapse.in').collapse('hide');
+				$('html, body').animate({scrollTop:0}, 'fast');
+            });
+			$(document).click(function (event) {
+				$('.navbar-collapse').collapse('hide');
+			});
+			$(document).scroll(function (event) {
+				$('.navbar-collapse').collapse('hide');
+			});
+        });
+    </script>
+	<script src="./js/modals.js"></script>
+	<script src="./js/main.js"></script>
 	</body>
 </html>

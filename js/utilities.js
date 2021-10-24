@@ -15,6 +15,11 @@
           android.showToast(text);
   }
 
+function cancelModal(modalID, textID) {
+    $(modalID).modal('hide');
+    if (textID != '')
+        clearModalContent(textID);
+}
 
   function showProgressBar(show) {
       var overlayDiv = document.createElement("div");

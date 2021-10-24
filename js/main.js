@@ -6,6 +6,36 @@ var images = ["https://picsum.photos/720/540/?image=517",
               "https://picsum.photos/720/540/?image=1074"]
 
 showProgressBar(true);
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAQPyo406YGSeUCmqQc0MSIzTVFVylm7Xo",
+  authDomain: "matchmaker-453d0.firebaseapp.com",
+  projectId: "matchmaker-453d0",
+  storageBucket: "matchmaker-453d0.appspot.com",
+  messagingSenderId: "1073107618361",
+  appId: "1:1073107618361:web:fe160008591d4c0965dbe8"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+window.addEventListener("load", function(){
+    if (typeof android !== 'undefined')
+	{
+		android.pageIsReady();
+	}
+});
+
+
+$(function() {
+    var hash = window.location.hash;	
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+    $(".navbar").affix({
+        offset: {
+            top: $("header").outerHeight(true)
+        }
+    });
+});
+
 var loadedImages = 0;
 
 
