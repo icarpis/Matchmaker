@@ -173,7 +173,7 @@ body { font-family: sans-serif; }
 body { font-family: sans-serif; }
 
 .carousel {
-  background: #83c4cc;
+  background: #9fbcbf;
   width: 98%;
   margin-left: auto;
   margin-right:auto;
@@ -192,7 +192,8 @@ body { font-family: sans-serif; }
 
 .carousel.is-fullscreen .carousel-cell {
   height: 100%;
-}
+  width: 100%;
+ }
 
 .carousel-cell-image {
   display: block;
@@ -201,9 +202,5 @@ body { font-family: sans-serif; }
 
 .carousel.is-fullscreen .carousel-cell-image {
   max-width: 100%;
+  width: 100%;
 }
-
-.carousel.is-fullscreen .carousel-cell {
-  height: 100%;
-}
-

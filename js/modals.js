@@ -18,23 +18,22 @@ document.body.innerHTML += '<!-- Yes/No Modal -->\
 
 // Modal with text-box
 document.body.innerHTML += '<!-- Modal -->\
-<div class="modal fade" id="homeTextModal" tabindex="-1" role="dialog" aria-labelledby="homeTextModalLabel" aria-hidden="true">\
+<div class="modal fade" id="delPerson" tabindex="-1" role="dialog" aria-labelledby="DelPersonModalLabel1" aria-hidden="true">\
   <div class="modal-dialog" role="document">\
 	<div class="modal-content">\
 	  <div class="modal-header">\
-		<p class="modal-title" id="homeTextModalLabel">עריכת טקסט</p>\
+		<p class="modal-title" id="DelPersonModalLabel1">עריכת טקסט</p>\
 	  </div>\
 	  <div class="modal-body">\
 		<form>\
 		  <div class="form-group">\
-			<label for="home-text" class="col-form-label">תוכן:</label>\
-			<textarea class="form-control" id="home-text" style="height: 120px; font-size: 18px;resize: none;"></textarea>\
+			<label for="home-text" class="col-form-label">האם אתה בטוח שברצונך למחוק את הרשומה?</label>\
 		  </div>\
 		</form>\
 	  </div>\
 	  <div class="modal-footer">\
-		<button type="button" style="text-align: center;font-size: 16px;" class="btn btn-secondary" onclick="cancelModal(\'#homeTextModal\', \'home-text\');">ביטול</button>\
-		<button id="textBoxOnClick" type="button" style="margin-right:10px;text-align: center;font-size: 16px;" class="btn btn-primary">אישור</button>\
+		<button type="button" style="text-align: center;font-size: 16px;" class="btn btn-secondary" onclick="cancelModal(\'#delPerson\', \'\');">ביטול</button>\
+		<button id="textBoxOnClick" type="button" style="margin-right:10px;text-align: center;font-size: 16px;" class="btn btn-primary" onclick="deleteDbEntry();">אישור</button>\
 	  </div>\
 	</div>\
   </div>\
@@ -59,7 +58,7 @@ document.body.innerHTML += '<!-- Password Modal -->\
 	  </div>\
 	  <div class="modal-footer">\
 		<button type="button" style="text-align: center;font-size: 16px;" class="btn btn-secondary" onclick="cancelModal(\'#signInModal\', \'signIn-text\');">ביטול</button>\
-		<button type="button" style="margin-right:10px;text-align: center;font-size: 16px;" class="btn btn-primary" onclick="signInWithPassword(document.getElementById(\'signIn-text\').value);">אישור</button>\
+		<button type="button" style="margin-right:10px;text-align: center;font-size: 16px;" class="btn btn-primary" onclick="deleteDbEntry();">אישור</button>\
 	  </div>\
 	</div>\
   </div>\
@@ -110,7 +109,7 @@ document.body.innerHTML += '<!-- Modal -->\
 			<div style="padding: 15px 50px 15px 100px;"></div>\
 			<div>\
 				<label for="person_image">בחר תמונה להעלאה:</label>\
-				<input type="file" id="person_image" name="person_image"><br><br>\
+				<input type="file" id="person_image" name="person_image" accept="image/png, image/jpeg, image/jpg"><br><br>\
 			</div>\
 		  </div>\
 		</form>\

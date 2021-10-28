@@ -6,14 +6,26 @@
   function reloadPage(pass) {
 	  showProgressBar(true);
       if (typeof android !== 'undefined')
+	  {
           android.reloadPage(pass);
+	  }
 	  showProgressBar(false);
   }
   
   function showToast(text) {
       if (typeof android !== 'undefined')
+	  {
           android.showToast(text);
+	  }
+	  else
+	  {
+		  alert(text);
+	  }
   }
+
+function clearModalContent(textID) {
+    document.getElementById(textID).value = '';
+}
 
 function cancelModal(modalID, textID) {
     $(modalID).modal('hide');
