@@ -42,7 +42,7 @@ document.body.innerHTML += '<!-- Modal -->\
 
 // Password Modal
 document.body.innerHTML += '<!-- Password Modal -->\
-<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">\
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="signInModalLabel" aria-hidden="true">\
   <div class="modal-dialog" role="document">\
 	<div class="modal-content">\
 	  <div class="modal-header">\
@@ -57,8 +57,7 @@ document.body.innerHTML += '<!-- Password Modal -->\
 		</form>\
 	  </div>\
 	  <div class="modal-footer">\
-		<button type="button" style="text-align: center;font-size: 16px;" class="btn btn-secondary" onclick="cancelModal(\'#signInModal\', \'signIn-text\');">ביטול</button>\
-		<button type="button" style="margin-right:10px;text-align: center;font-size: 16px;" class="btn btn-primary" onclick="deleteDbEntry();">אישור</button>\
+		<button type="button" style="margin-right:10px;text-align: center;font-size: 16px;" class="btn btn-primary" onclick="SignIn(document.getElementById(\'signIn-text\').value);">אישור</button>\
 	  </div>\
 	</div>\
   </div>\
@@ -121,3 +120,9 @@ document.body.innerHTML += '<!-- Modal -->\
 	</div>\
   </div>\
 </div>'
+
+
+document.getElementById("signInModal").addEventListener("submit", function(event) {
+    event.preventDefault();
+    SignIn(document.getElementById('signIn-text').value);
+});

@@ -172,6 +172,26 @@ function addEditPerson()
 			 city: city,
 			 imageUrl: info["imagePath"],
 			 imageFileName: info["imageFileName"]};
+			 
+		if (info["gender"] != gender) // Entry is moving from Male to Female or the other way around
+		{
+			var removeEntryPath = '';
+			if (info["gender"] == "male")
+			{
+				id = femaleDbRoot + info["id"];
+				removeEntryPath = maleDbRoot + info["id"];
+			}
+			else
+			{
+				id = maleDbRoot + info["id"];
+				removeEntryPath = femaleDbRoot + info["id"];
+			}
+			var removeRef = firebase.database().ref(removeEntryPath);
+			removeRef.remove().catch(function(error) {
+						showToast("מחיקה נכשלה!");
+					});
+		}
+			 
 		updates[id] = dbEntries;
 		firebase.database().ref().update(updates).then(() => {
 																cancelModal('#addEditPerson', '');

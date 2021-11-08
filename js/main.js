@@ -1,5 +1,3 @@
-showProgressBar(true);
-
 var DEBUG = false;
 
 var femaleDbRoot = 'female/';
@@ -24,12 +22,44 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase.auth().signOut();
+
 window.addEventListener("load", function(){
     if (typeof android !== 'undefined')
 	{
 		android.pageIsReady();
 	}
 });
+
+
+function ShowSignInModal()
+{
+	$('#signInModal').modal();
+	$('#signIn-text').focus();
+}
+
+var signedIn = false;
+ShowSignInModal();
+function SignIn(passw) {
+	showProgressBar(true);
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (!signedIn && user)
+		{
+			cancelModal('#signInModal', 'signIn-text');
+			signedIn = true;
+			buildFemaleCarousel();
+			buildMaleCarousel();
+		}
+	});
+	
+	firebase.auth().signInWithEmailAndPassword("itay.carpis@gmail.com", passw).catch(function(error) {
+			// Handle Errors here.
+			showProgressBar(false);
+			showToast("הסיסמא שגויה!");
+			clearModalContent('signIn-text');
+			$('#signIn-text').focus();
+		}); 
+}
 
 
 $(function() {
@@ -172,7 +202,6 @@ function buildFemaleCarousel()
 		});
 }
 
-buildFemaleCarousel();
 
 
 function updateMaleTable(maleInfo) {
@@ -258,5 +287,3 @@ function buildMaleCarousel()
 			}
 		});
 }
-
-buildMaleCarousel();
